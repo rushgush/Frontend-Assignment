@@ -1,11 +1,9 @@
 import React from 'react';
-import './App.css';
+import InputForm from './components/input_component';
 
 function App() {
   return (
-    <div className="App">
-     hello
-    </div>
+      <InputForm />
   );
 }
 
