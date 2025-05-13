@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { validateMemory } from '../utils/memoryValidation';
 
 interface ConfigFormProps {
   onSubmit: (config: {
@@ -15,37 +16,10 @@ const ConfigurationForm: React.FC<ConfigFormProps> = ({ onSubmit }) => {
   const [hasGPU, setHasGPU] = useState<boolean>(false);
   const [memoryError, setMemoryError] = useState<string>('');
 
-  const validateMemory = (value: string): boolean => {
-    // Remove commas for validation
-    const memoryValue = parseInt(value.replace(/,/g, ''), 10);
-    
-    // Check if it's a valid number
-    if (isNaN(memoryValue)) {
-      setMemoryError('Please enter a valid number');
-      return false;
-    }
-    
-    // Check range (4,096MB to 8,388,608MB)
-    if (memoryValue < 4096 || memoryValue > 8388608) {
-      setMemoryError('Memory must be between 4,096MB and 8,388,608MB');
-      return false;
-    }
-    
-    // Check if it's a multiple of 1024
-    if (memoryValue % 1024 !== 0) {
-      setMemoryError('Memory must be a multiple of 1024MB');
-      return false;
-    }
-    
-    // Check if it's a power of 2
-    const log2 = Math.log2(memoryValue);
-    if (log2 !== Math.floor(log2)) {
-      setMemoryError('Memory must be a power of 2');
-      return false;
-    }
-    
-    setMemoryError('');
-    return true;
+  const handleMemoryChange = (value: string) => {
+    setMemory(value);
+    const validation = validateMemory(value);
+    setMemoryError(validation.error || '');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -91,7 +65,7 @@ const ConfigurationForm: React.FC<ConfigFormProps> = ({ onSubmit }) => {
         <TextField
           label="Memory Size (MB)"
           value={memory}
-          onChange={(e) => setMemory(e.target.value)}
+          onChange={(e) => handleMemoryChange(e.target.value)}
           helperText={memoryError || "Enter memory in MB (e.g., 4,096)"}
           error={!!memoryError}
           required
