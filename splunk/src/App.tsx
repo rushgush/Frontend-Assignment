@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Divider, Paper, Typography, Box, ThemeProvider, createTheme } from '@mui/material';
+import { Container, Paper, Typography, Box, ThemeProvider, createTheme } from '@mui/material';
 import ConfigurationForm from './components/ConfigurationForm';
 import ResultsDisplay from './components/ResultsDisplay';
 import { getAvailableServerModels, ServerModel } from './utils/serverModelSelection';

@@ -9,8 +9,7 @@ import {
   MenuItem, 
   Select, 
   TextField, 
-  Typography,
-  Divider
+  Typography
 } from '@mui/material';
 import { validateMemory } from '../utils/memoryValidation';
 
