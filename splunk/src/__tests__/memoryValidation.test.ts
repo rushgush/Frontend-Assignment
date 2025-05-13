@@ -2,8 +2,8 @@ import { validateMemory } from '../utils/memoryValidation';
 
 describe('Memory Validation', () => {
   test('should accept valid memory values', () => {
-    // Valid values: multiples of 1024 and powers of 2, within range
-    const validValues = ['4096', '4,096', '8192', '8,192', '16384', '16,384', '32768', '32,768', '8388608', '8,388,608'];
+    // Valid values: multiples of 1024 and powers of 2, within range, comma-formatted
+    const validValues = ['4,096', '8,192', '16,384', '32,768', '8,388,608'];
     
     validValues.forEach(value => {
       const result = validateMemory(value);

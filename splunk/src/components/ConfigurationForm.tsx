@@ -27,9 +27,25 @@ const ConfigurationForm: React.FC<ConfigFormProps> = ({ onSubmit }) => {
   const [hasGPU, setHasGPU] = useState<boolean>(false);
   const [memoryError, setMemoryError] = useState<string>('');
 
+  // Add this function to format numbers with commas
+  const formatWithCommas = (value: string): string => {
+    // Remove any existing commas
+    const cleanValue = value.replace(/,/g, '');
+    
+    // Format with commas
+    return cleanValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // Then update the memory change handler:
   const handleMemoryChange = (value: string) => {
-    setMemory(value);
-    const validation = validateMemory(value);
+    // Only allow digits and commas
+    const sanitizedValue = value.replace(/[^\d,]/g, '');
+    
+    // Format with commas
+    const formattedValue = formatWithCommas(sanitizedValue);
+    
+    setMemory(formattedValue);
+    const validation = validateMemory(formattedValue);
     setMemoryError(validation.error || '');
   };
 
