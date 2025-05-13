@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { 
+  Box, 
+  Button, 
+  Checkbox, 
+  FormControl, 
+  FormControlLabel, 
+  InputLabel, 
+  MenuItem, 
+  Select, 
+  TextField, 
+  Typography,
+  Divider
+} from '@mui/material';
 import { validateMemory } from '../utils/memoryValidation';
 
 interface ConfigFormProps {
